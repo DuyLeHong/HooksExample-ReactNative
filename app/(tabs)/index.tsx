@@ -1,60 +1,78 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, View, Text, Button, SafeAreaView } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useEffect, useRef, useState } from 'react';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  const [count, setCount] = useState(10);
+
+  const [inforUser, setInforUser] = useState({
+    name: 'Nguyen Van A',
+    age: 20,
+  });
+
+
+  const handleIncrease = () => {
+    setCount(count + 5);
+  };
+
+  const updateInforUser = () => {
+    setInforUser({
+      ...inforUser,
+      age: 21,
+    });
+  };
+
+  // useEffect(() => {
+  //   console.log('useEffect này chạy mỗi lần component render');
+  // });
+
+  // useEffect(() => {
+  //   console.log('useEffect chỉ chạy lần đầu tiên khi component render');
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log('useEffect khởi chạy khi count thay đổi giá trị');
+  // }, [count, inforUser]);
+
+  const prevCount = useRef(count);
+
+  useEffect(() => {
+    prevCount.current = count;
+    
+  }, [count]);
+
+  console.log(
+    'prevCount = ', prevCount.current, 'count = ', count
   );
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <Text style={styles.textCount}>{count}</Text>
+        <Button title="Tăng" onPress={handleIncrease} />
+
+        <Text style={styles.textCount}>{inforUser.name} - {inforUser.age}</Text>
+
+        <Button title='Update Info User' onPress={updateInforUser} />
+      </View>
+    </SafeAreaView>
+  );
+
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textCount: {
+    fontSize: 40
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
