@@ -7,10 +7,12 @@ import { ThemedView } from '@/components/ThemedView';
 import { useEffect, useRef, useState } from 'react';
 
 export default function HomeScreen() {
-  const [count, setCount] = useState(10);
+  // render lại cả function
+  console.log('render lại cả function')
+  const [count, setCount] = useState(0);
 
   const [inforUser, setInforUser] = useState({
-    name: 'Nguyen Van A',
+    name: 'Nguyen Van Long',
     age: 20,
   });
 
@@ -23,20 +25,21 @@ export default function HomeScreen() {
     setInforUser({
       ...inforUser,
       age: 21,
+      name: 'Phu Le'
     });
   };
 
-  // useEffect(() => {
-  //   console.log('useEffect này chạy mỗi lần component render');
-  // });
+  useEffect(() => {
+    console.log('useEffect này chạy mỗi lần component render');
+  });
 
-  // useEffect(() => {
-  //   console.log('useEffect chỉ chạy lần đầu tiên khi component render');
-  // }, []);
+  useEffect(() => {
+    console.log('useEffect chỉ chạy lần đầu tiên khi component render');
+  }, []); // giong voi onStart, onCreate trong Android
 
-  // useEffect(() => {
-  //   console.log('useEffect khởi chạy khi count thay đổi giá trị');
-  // }, [count, inforUser]);
+  useEffect(() => {
+    console.log('useEffect khởi chạy khi bien thay đổi giá trị');
+  }, [inforUser, count]);
 
   const prevCount = useRef(count);
 
@@ -45,9 +48,9 @@ export default function HomeScreen() {
     
   }, [count]);
 
-  console.log(
-    'prevCount = ', prevCount.current, 'count = ', count
-  );
+  // console.log(
+  //   'prevCount = ', prevCount.current, 'count = ', count
+  // );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
