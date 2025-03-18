@@ -31,7 +31,7 @@ export default function TabTwoScreen() {
         <Button title="Tăng state 1" onPress={handleIncrease} />
         <View style={styles.seperate} />
         <Button title="Tăng state 2" onPress={handleIncrease2} />
-        <Content count={count2} />
+        <Content count={count} />
       </View>
 
     </SafeAreaView>

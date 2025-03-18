@@ -11,7 +11,7 @@ export default function Screen3 () {
 
     }, []);
 
-    //console.log('render lai ca function')
+    console.log('render lai ca function')
 
     return (
 

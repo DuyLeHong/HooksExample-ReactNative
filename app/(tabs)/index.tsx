@@ -9,11 +9,11 @@ import { useEffect, useRef, useState } from 'react';
 export default function HomeScreen() {
   // render lại cả function
   console.log('render lại cả function')
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(20);
 
   const [inforUser, setInforUser] = useState({
-    name: 'Nguyen Van Long',
-    age: 20,
+    name: 'Le Tuan Anh',
+    age: 25,
   });
 
 
@@ -29,9 +29,9 @@ export default function HomeScreen() {
     });
   };
 
-  useEffect(() => {
-    console.log('useEffect này chạy mỗi lần component render');
-  });
+  // useEffect(() => {
+  //   console.log('useEffect này chạy mỗi lần component render');
+  // });
 
   useEffect(() => {
     console.log('useEffect chỉ chạy lần đầu tiên khi component render');
@@ -39,7 +39,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     console.log('useEffect khởi chạy khi bien thay đổi giá trị');
-  }, [inforUser, count]);
+  }, [count, inforUser]);
 
   const prevCount = useRef(count);
 

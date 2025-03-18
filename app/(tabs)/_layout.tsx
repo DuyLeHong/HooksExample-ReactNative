@@ -8,6 +8,10 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+export const unstable_settings = {
+  ignoreRouteGroups: true,
+};
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
@@ -44,6 +48,13 @@ export default function TabLayout() {
         name="screen3"
         options={{
           title: 'Use Callback',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="screen4"
+        options={{
+          title: 'Use Context',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
